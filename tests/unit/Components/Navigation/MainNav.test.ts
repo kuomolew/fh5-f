@@ -25,8 +25,6 @@ describe('MainNav', () => {
         },
       },
     });
-
-    return { push };
   };
 
   it('renders title text', () => {
