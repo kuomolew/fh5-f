@@ -1,7 +1,7 @@
 <template>
   <header class="w-full text-sm h-16">
     <div class="fixed top-0 left-0 w-full bg-white h-16">
-      <div class="flex flex-nowrap h-full border-b border-solid border-brand-gray-1 px-8 mx-auto">
+      <div class="flex flex-nowrap h-full border-b border-solid border-gray-200 px-8 mx-auto">
         <router-link :to="{ name: 'Home' }" class="flex h-full items-center text-xl font-semibold">
           Forza Auction Helper
         </router-link>

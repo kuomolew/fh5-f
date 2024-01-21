@@ -1,5 +1,9 @@
 <template>
   <main>
-    <p class="text-cyan-600 text-xl">Home</p>
+    <manufacturer-letter-selection />
   </main>
 </template>
+
+<script lang="ts" setup>
+import ManufacturerLetterSelection from '@/components/Selection/ManufacturerLetterSelection.vue';
+</script>
