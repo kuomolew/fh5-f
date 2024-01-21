@@ -12,6 +12,12 @@ describe('state', () => {
 
     expect(store.isLoggedIn).toBe(false);
   });
+
+  it('keeps track selected by user manufacturer letter', () => {
+    const store = useUserStore();
+
+    expect(store.selectedManufacturerLetter).toBe('');
+  });
 });
 
 describe('actions', () => {
@@ -25,6 +31,32 @@ describe('actions', () => {
 
       store.LOGIN_USER();
       expect(store.isLoggedIn).toBe(true);
+    });
+  });
+
+  describe('SELECT_MANUFACTURER_LETTER', () => {
+    it('updates selected by user manufacturer letter', () => {
+      const store = useUserStore();
+
+      store.SELECT_MANUFACTURER_LETTER('All');
+      expect(store.selectedManufacturerLetter).toBe('All');
+    });
+  });
+});
+
+describe('getters', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia());
+  });
+
+  describe('GET_MANUFACTURER_LETTER', () => {
+    it('provides selected by user manufacturer letter', () => {
+      const store = useUserStore();
+      store.selectedManufacturerLetter = 'All';
+
+      const request = store.GET_MANUFACTURER_LETTER();
+
+      expect(request).toBe('All');
     });
   });
 });
