@@ -14,7 +14,7 @@ describe('state', () => {
     setActivePinia(createPinia());
   });
 
-  it('stores job listings', () => {
+  it('stores cars listings', () => {
     const store = useCarsStore();
     expect(store.cars).toEqual([]);
   });
