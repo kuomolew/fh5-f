@@ -1,9 +1,12 @@
 const allFirstLetters = (list: string[]) => {
   const lettersSet = new Set<string>();
-  list.forEach((value) => {
-    const capitalFirstLetter = value[0].toUpperCase();
-    lettersSet.add(capitalFirstLetter);
-  });
+
+  if (list.length > 0) {
+    list.forEach((value) => {
+      const capitalFirstLetter = value[0].toUpperCase();
+      lettersSet.add(capitalFirstLetter);
+    });
+  }
 
   const lettersArray = Array.from(lettersSet);
 
