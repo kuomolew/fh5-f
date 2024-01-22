@@ -2,6 +2,8 @@ import { defineStore } from 'pinia';
 
 import getManufacturers from '@/api/getManufacturers';
 
+import { useUserStore } from '@/stores/user';
+
 export interface ManufacturersState {
   manufacturers: string[];
 }
@@ -18,7 +20,24 @@ export const useManufacturersStore = defineStore('cars', {
   },
 
   getters: {
-    FILTERED_MANUFACTURERS(state) {
+    INCLUDE_MANUFACTURER_BY_LETTER: () => (manufacturer: String) => {
+      const userStore = useUserStore();
+      const manufacturerFirstLetter = manufacturer[0].toUpperCase();
+      if (
+        userStore.selectedManufacturerLetter.length === 0 ||
+        userStore.selectedManufacturerLetter === 'All'
+      )
+        return true;
+      return userStore.selectedManufacturerLetter === manufacturerFirstLetter;
+    },
+
+    FILTERED_MANUFACTURERS(state): string[] {
+      return state.manufacturers.filter((manufacturer) =>
+        this.INCLUDE_MANUFACTURER_BY_LETTER(manufacturer),
+      );
+    },
+
+    ALL_MANUFACTURERS(state): string[] {
       return state.manufacturers;
     },
   },
