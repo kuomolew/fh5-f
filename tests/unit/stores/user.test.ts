@@ -16,7 +16,7 @@ describe('state', () => {
   it('keeps track selected by user manufacturer letter', () => {
     const store = useUserStore();
 
-    expect(store.selectedManufacturerLetter).toBe('');
+    expect(store.selectedManufacturerLetter).toBe('All');
   });
 });
 
