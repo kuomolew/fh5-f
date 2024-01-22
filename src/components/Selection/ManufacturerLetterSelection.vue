@@ -28,7 +28,7 @@ import allFirstLetters from '@/utils/allFirstLetters';
 const manufacturersStore = useManufacturersStore();
 onMounted(manufacturersStore.FETCH_MANUFACTURERS);
 
-let manufacturers = computed(() => manufacturersStore.FILTERED_MANUFACTURERS);
+let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
 let manufacturerLetters = computed(() => allFirstLetters(manufacturers.value));
 
 const userStore = useUserStore();
