@@ -12,6 +12,7 @@ export const useManufacturersStore = defineStore('cars', {
   state: (): ManufacturersState => ({
     manufacturers: [],
   }),
+
   actions: {
     async FETCH_MANUFACTURERS() {
       const manufacturers = await getManufacturers();
@@ -32,13 +33,13 @@ export const useManufacturersStore = defineStore('cars', {
     },
 
     FILTERED_MANUFACTURERS(state): string[] {
-      return state.manufacturers.filter((manufacturer) =>
-        this.INCLUDE_MANUFACTURER_BY_LETTER(manufacturer),
-      );
+      return state.manufacturers
+        .filter((manufacturer) => this.INCLUDE_MANUFACTURER_BY_LETTER(manufacturer))
+        .sort((a, b) => a.localeCompare(b));
     },
 
     ALL_MANUFACTURERS(state): string[] {
-      return state.manufacturers;
+      return state.manufacturers.sort((a, b) => a.localeCompare(b));
     },
   },
 });
