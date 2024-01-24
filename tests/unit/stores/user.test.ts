@@ -18,6 +18,12 @@ describe('state', () => {
 
     expect(store.selectedManufacturerLetter).toBe('All');
   });
+
+  it('keeps track selected by user manufacturer', () => {
+    const store = useUserStore();
+
+    expect(store.selectedManufacturer).toBe('');
+  });
 });
 
 describe('actions', () => {
@@ -42,6 +48,15 @@ describe('actions', () => {
       expect(store.selectedManufacturerLetter).toBe('All');
     });
   });
+
+  describe('SELECT_MANUFACTURER', () => {
+    it('updates selected by user manufacturer', () => {
+      const store = useUserStore();
+
+      store.SELECT_MANUFACTURER('Peugeot');
+      expect(store.selectedManufacturer).toBe('Peugeot');
+    });
+  });
 });
 
 describe('getters', () => {
@@ -57,6 +72,17 @@ describe('getters', () => {
       const request = store.GET_MANUFACTURER_LETTER();
 
       expect(request).toBe('All');
+    });
+  });
+
+  describe('GET_MANUFACTURER', () => {
+    it('provides selected by user manufacturer', () => {
+      const store = useUserStore();
+      store.selectedManufacturer = 'Peugeot';
+
+      const request = store.GET_MANUFACTURER();
+
+      expect(request).toBe('Peugeot');
     });
   });
 });
