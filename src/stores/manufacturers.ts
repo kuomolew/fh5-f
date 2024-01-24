@@ -24,11 +24,10 @@ export const useManufacturersStore = defineStore('cars', {
     INCLUDE_MANUFACTURER_BY_LETTER: () => (manufacturer: String) => {
       const userStore = useUserStore();
       const manufacturerFirstLetter = manufacturer[0].toUpperCase();
-      if (
-        userStore.selectedManufacturerLetter.length === 0 ||
-        userStore.selectedManufacturerLetter === 'All'
-      )
-        return true;
+
+      if (userStore.selectedManufacturerLetter === 'All') return true;
+      if (userStore.selectedManufacturerLetter.length === 0) return false;
+
       return userStore.selectedManufacturerLetter === manufacturerFirstLetter;
     },
 

@@ -44,10 +44,10 @@ describe('getters', () => {
   });
 
   describe('INCLUDE_MANUFACTURER_BY_LETTER', () => {
-    describe('when user selected all letters', () => {
-      it('includes all manufacturers', () => {
+    describe('when none letter was selected', () => {
+      it('includes none of manufacturers', () => {
         const userStore = useUserStore();
-        userStore.selectedManufacturerLetter = 'All';
+        userStore.selectedManufacturerLetter = '';
 
         const manufacturers = ['Acura', 'Honda', 'Mitsubishi'];
 
@@ -59,14 +59,14 @@ describe('getters', () => {
           result.push(store.INCLUDE_MANUFACTURER_BY_LETTER(manufacturer)),
         );
 
-        expect(result).toEqual([true, true, true]);
+        expect(result).toEqual([false, false, false]);
       });
     });
 
-    describe('when none letter was selected', () => {
+    describe('when user selected all letters', () => {
       it('includes all manufacturers', () => {
         const userStore = useUserStore();
-        userStore.selectedManufacturerLetter = '';
+        userStore.selectedManufacturerLetter = 'All';
 
         const manufacturers = ['Acura', 'Honda', 'Mitsubishi'];
 
