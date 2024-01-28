@@ -57,6 +57,16 @@ describe('actions', () => {
       expect(store.selectedManufacturer).toBe('Peugeot');
     });
   });
+
+  describe('RESET_MANUFACTURER', () => {
+    it('resets selected by user manufacturer to empty string', () => {
+      const store = useUserStore();
+
+      store.SELECT_MANUFACTURER('Peugeot');
+      store.RESET_MANUFACTURER();
+      expect(store.selectedManufacturer).toBe('');
+    });
+  });
 });
 
 describe('getters', () => {

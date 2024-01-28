@@ -18,6 +18,10 @@ export const useUserStore = defineStore('user', () => {
     selectedManufacturer.value = manufacturer;
   };
 
+  const RESET_MANUFACTURER = () => {
+    selectedManufacturer.value = '';
+  };
+
   const GET_MANUFACTURER_LETTER = () => {
     return selectedManufacturerLetter.value;
   };
@@ -33,6 +37,7 @@ export const useUserStore = defineStore('user', () => {
     LOGIN_USER,
     SELECT_MANUFACTURER_LETTER,
     SELECT_MANUFACTURER,
+    RESET_MANUFACTURER,
     GET_MANUFACTURER_LETTER,
     GET_MANUFACTURER,
   };
