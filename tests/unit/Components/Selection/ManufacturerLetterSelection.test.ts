@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/vue';
 import { createTestingPinia } from '@pinia/testing';
+import { createPinia, setActivePinia } from 'pinia';
 
 import userEvent from '@testing-library/user-event';
 
@@ -60,19 +61,22 @@ describe('ManufacturerLetterSelection', () => {
     expect(userStore.SELECT_MANUFACTURER_LETTER).toHaveBeenCalledWith('P');
   });
 
-  // describe('when manufacturer letter is selected', () => {
-  //   it('applies active styles to selected letter', async () => {
-  //     const manufacturersStore = useManufacturersStore();
-  //     manufacturersStore.manufacturers = [];
+  describe('when manufacturer letter is selected', () => {
+    it('applies active styles to selected letter', async () => {
+      setActivePinia(createPinia());
+      const manufacturersStore = useManufacturersStore();
+      manufacturersStore.manufacturers = ['Acura'];
 
-  //     const userStore = useUserStore();
-  //     userStore.selectedManufacturerLetter = 'All';
+      const userStore = useUserStore();
+      userStore.SELECT_MANUFACTURER_LETTER('A');
 
-  //     render(ManufacturerLetterSelection);
+      render(ManufacturerLetterSelection);
 
-  //     const manufacturerLetterItem = await screen.findByRole('button');
+      const manufacturerLetterItem = await screen.findByRole('button', {
+        name: '[ A ]',
+      });
 
-  //     expect(manufacturerLetterItem).toHaveClass('active');
-  //   });
-  // });
+      expect(manufacturerLetterItem).toHaveClass('active');
+    });
+  });
 });
