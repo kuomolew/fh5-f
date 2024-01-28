@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/vue';
 import { createTestingPinia } from '@pinia/testing';
+import userEvent from '@testing-library/user-event';
 
 import ManufacturerSelection from '@/components/Selection/ManufacturerSelection.vue';
 import { useManufacturersStore } from '@/stores/manufacturers';
+import { useUserStore } from '@/stores/user';
 
 const renderManufacturerSelection = () => {
   const pinia = createTestingPinia();
@@ -31,5 +33,25 @@ describe('ManufacturerSelection', () => {
     const manufacturerButtonTexts = manufacturerButtons.map((item) => item.textContent);
 
     expect(manufacturerButtonTexts).toEqual(manufacturers);
+  });
+
+  describe('when user clicks the card', () => {
+    it('adds clicked manufacturer to selected', async () => {
+      renderManufacturerSelection();
+
+      const manufacturers = ['Acura', 'Aston Martin', 'Bugatti', 'Peugeot'];
+      const manufacturersStore = useManufacturersStore();
+      manufacturersStore.manufacturers = [...manufacturers];
+
+      const userStore = useUserStore();
+
+      const manufacturerItem = await screen.findByRole('button', {
+        name: 'Peugeot',
+      });
+
+      await userEvent.click(manufacturerItem);
+
+      expect(userStore.SELECT_MANUFACTURER).toHaveBeenCalledWith('Peugeot');
+    });
   });
 });

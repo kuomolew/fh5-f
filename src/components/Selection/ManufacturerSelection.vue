@@ -6,8 +6,9 @@
     <manufacturer-card
       v-for="manufacturer in manufacturers"
       :key="manufacturer"
-      :is-active="false"
+      :is-active="isManufacturerSelected(manufacturer)"
       :manufacturer="manufacturer"
+      @click="selectManufacturer(manufacturer)"
     />
   </div>
 </template>
@@ -15,9 +16,19 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useManufacturersStore } from '@/stores/manufacturers';
+import { useUserStore } from '@/stores/user';
 import ManufacturerCard from '@/components/Cards/ManufacturerCard.vue';
 
 const manufacturersStore = useManufacturersStore();
+const userStore = useUserStore();
 
 let manufacturers = computed(() => manufacturersStore.FILTERED_MANUFACTURERS);
+
+let selectManufacturer = (manufacturer: string) => {
+  userStore.SELECT_MANUFACTURER(manufacturer);
+};
+
+let isManufacturerSelected = (manufacturer: string) => {
+  return manufacturer === userStore.selectedManufacturer;
+};
 </script>
