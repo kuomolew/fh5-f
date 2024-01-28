@@ -39,29 +39,29 @@ describe('ManufacturerLetterSelection', () => {
     expect(manufacturerLetterTexts).toEqual([' All ', ' A ', ' B ', ' P ']);
   });
 
-  it('sends selected letter to user store', async () => {
-    const pinia = createTestingPinia();
-    const manufacturers = ['Peugeot'];
-    const manufacturersStore = useManufacturersStore();
-    manufacturersStore.manufacturers = [...manufacturers];
+  describe('when user clicks the letter', () => {
+    it('sends selected letter to user store', async () => {
+      const pinia = createTestingPinia();
+      const manufacturers = ['Peugeot'];
+      const manufacturersStore = useManufacturersStore();
+      manufacturersStore.manufacturers = [...manufacturers];
 
-    render(ManufacturerLetterSelection, {
-      global: {
-        plugins: [pinia],
-      },
+      render(ManufacturerLetterSelection, {
+        global: {
+          plugins: [pinia],
+        },
+      });
+      const userStore = useUserStore();
+
+      const manufacturerLetterItem = await screen.findByRole('button', {
+        name: 'P',
+      });
+
+      await userEvent.click(manufacturerLetterItem);
+
+      expect(userStore.SELECT_MANUFACTURER_LETTER).toHaveBeenCalledWith('P');
     });
-    const userStore = useUserStore();
 
-    const manufacturerLetterItem = await screen.findByRole('button', {
-      name: 'P',
-    });
-
-    await userEvent.click(manufacturerLetterItem);
-
-    expect(userStore.SELECT_MANUFACTURER_LETTER).toHaveBeenCalledWith('P');
-  });
-
-  describe('when manufacturer letter is selected', () => {
     it('applies active styles to selected letter', async () => {
       setActivePinia(createPinia());
       const manufacturersStore = useManufacturersStore();
