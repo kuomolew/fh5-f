@@ -8,7 +8,7 @@ export interface ManufacturersState {
   manufacturers: string[];
 }
 
-export const useManufacturersStore = defineStore('cars', {
+export const useManufacturersStore = defineStore('manufacturers', {
   state: (): ManufacturersState => ({
     manufacturers: [],
   }),

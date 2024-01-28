@@ -5,20 +5,20 @@
       <button
         v-for="letter of manufacturerLetters"
         :key="letter"
-        :class="{ active: isActiveLetter(letter) }"
+        :class="{ active: isLetterSelected(letter) }"
         class="px-2 cursor-pointer"
         @click="selectManufacturerLetter(letter)"
       >
-        <span v-if="isActiveLetter(letter)">[</span>
+        <span v-if="isLetterSelected(letter)">[</span>
         {{ letter }}
-        <span v-if="isActiveLetter(letter)">]</span>
+        <span v-if="isLetterSelected(letter)">]</span>
       </button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
@@ -26,7 +26,6 @@ import { useUserStore } from '@/stores/user';
 import allFirstLetters from '@/utils/allFirstLetters';
 
 const manufacturersStore = useManufacturersStore();
-onMounted(manufacturersStore.FETCH_MANUFACTURERS);
 
 let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
 let manufacturerLetters = computed(() => allFirstLetters(manufacturers.value));
@@ -36,9 +35,10 @@ let selectedLetter = computed(() => userStore.GET_MANUFACTURER_LETTER());
 
 const selectManufacturerLetter = (letter: string) => {
   userStore.SELECT_MANUFACTURER_LETTER(letter);
+  userStore.RESET_MANUFACTURER();
 };
 
-const isActiveLetter = (letter: string) => {
+let isLetterSelected = (letter: string) => {
   return letter === selectedLetter.value;
 };
 </script>

@@ -90,8 +90,8 @@ describe('getters', () => {
     });
   });
 
-  describe('FILTERED_CARS', () => {
-    it('gets all filtered cars', () => {
+  describe('FILTERED_CARS_BY_MANUFACTURER', () => {
+    it('gets all cars filtered by manufacturer', () => {
       const car1 = createCar({ manufacturer: 'Nissan' });
       const car2 = createCar();
 
@@ -101,7 +101,7 @@ describe('getters', () => {
       const store = useCarsStore();
       store.cars.push(car1, car2);
 
-      expect(store.FILTERED_CARS).toEqual([car1]);
+      expect(store.FILTERED_CARS_BY_MANUFACTURER).toEqual([car1]);
     });
   });
 

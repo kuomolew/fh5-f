@@ -28,7 +28,7 @@ export const useCarsStore = defineStore('cars', {
       return userStore.selectedManufacturer === car.manufacturer;
     },
 
-    FILTERED_CARS(state): Car[] {
+    FILTERED_CARS_BY_MANUFACTURER(state): Car[] {
       return state.cars.filter((car) => this.INCLUDE_CAR_BY_MANUFACTURER(car));
     },
 
