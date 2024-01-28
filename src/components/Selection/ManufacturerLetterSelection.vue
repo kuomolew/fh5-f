@@ -6,7 +6,7 @@
         v-for="letter of manufacturerLetters"
         :key="letter"
         :class="{ active: isLetterSelected(letter) }"
-        class="px-2 cursor-pointer"
+        class="cursor-pointer w-10"
         @click="selectManufacturerLetter(letter)"
       >
         <span v-if="isLetterSelected(letter)">[</span>

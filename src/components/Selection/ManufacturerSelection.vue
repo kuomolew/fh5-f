@@ -26,6 +26,11 @@ let manufacturers = computed(() => manufacturersStore.FILTERED_MANUFACTURERS);
 
 let selectManufacturer = (manufacturer: string) => {
   userStore.SELECT_MANUFACTURER(manufacturer);
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
 };
 
 let isManufacturerSelected = (manufacturer: string) => {
