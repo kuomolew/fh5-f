@@ -134,11 +134,11 @@ describe('CarCard', () => {
     const car = createCar({ autoshow: false });
     renderCarCard(car);
 
-    const value = screen.getByRole('heading', {
+    const autoshow = screen.getByRole('heading', {
       name: /not listed at autoshow/i,
     });
 
-    expect(value).toBeInTheDocument();
+    expect(autoshow).toBeInTheDocument();
   });
 
   it('renders car dlc', () => {
@@ -174,81 +174,13 @@ describe('CarCard', () => {
     expect(pi).toBeInTheDocument();
   });
 
-  it('renders car speed', () => {
-    const car = createCar({ speed: 100500 });
+  it('renders car stats component', () => {
+    const car = createCar();
     renderCarCard(car);
 
-    const speed = screen.getByRole('heading', {
-      name: /100500/i,
-    });
+    const statsComponent = screen.getByTestId('car-card-stats-div');
 
-    expect(speed).toBeInTheDocument();
-  });
-
-  it('renders car handling', () => {
-    const car = createCar({ handling: 100500 });
-    renderCarCard(car);
-
-    const handling = screen.getByRole('heading', {
-      name: /100500/i,
-    });
-
-    expect(handling).toBeInTheDocument();
-  });
-
-  it('renders car acceleration', () => {
-    const car = createCar({ acceleration: 100500 });
-    renderCarCard(car);
-
-    const acceleration = screen.getByRole('heading', {
-      name: /100500/i,
-    });
-
-    expect(acceleration).toBeInTheDocument();
-  });
-
-  it('renders car launch', () => {
-    const car = createCar({ launch: 100500 });
-    renderCarCard(car);
-
-    const launch = screen.getByRole('heading', {
-      name: /100500/i,
-    });
-
-    expect(launch).toBeInTheDocument();
-  });
-
-  it('renders car braking', () => {
-    const car = createCar({ braking: 100500 });
-    renderCarCard(car);
-
-    const braking = screen.getByRole('heading', {
-      name: /100500/i,
-    });
-
-    expect(braking).toBeInTheDocument();
-  });
-
-  it('renders car offroad', () => {
-    const car = createCar({ offroad: 100500 });
-    renderCarCard(car);
-
-    const offroad = screen.getByRole('heading', {
-      name: /100500/i,
-    });
-
-    expect(offroad).toBeInTheDocument();
-  });
-
-  it('renders car total stat', () => {
-    const car = createCar({ stat: 100500 });
-    renderCarCard(car);
-
-    const stat = screen.getByRole('heading', {
-      name: /100500/i,
-    });
-
-    expect(stat).toBeInTheDocument();
+    expect(statsComponent).toBeInTheDocument();
   });
 
   it('renders if car is at wheelspin if yes', () => {
