@@ -6,8 +6,15 @@ import ManufacturerSelection from '@/components/Selection/ManufacturerSelection.
 import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
 
+declare global {
+  interface Window {
+    originalScrollTo: typeof window.scrollTo;
+  }
+}
+
 const renderManufacturerSelection = () => {
   const pinia = createTestingPinia();
+
   render(ManufacturerSelection, {
     global: {
       plugins: [pinia],
@@ -36,6 +43,15 @@ describe('ManufacturerSelection', () => {
   });
 
   describe('when user clicks the card', () => {
+    beforeEach(() => {
+      window.originalScrollTo = window.scrollTo;
+      window.scrollTo = () => {};
+    });
+
+    afterEach(() => {
+      window.scrollTo = window.originalScrollTo;
+    });
+
     it('adds clicked manufacturer to selected', async () => {
       renderManufacturerSelection();
 

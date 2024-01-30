@@ -19,6 +19,8 @@ import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
 import ManufacturerCard from '@/components/Cards/ManufacturerCard.vue';
 
+import scrollToTop from '@/utils/scrollToTop';
+
 const manufacturersStore = useManufacturersStore();
 const userStore = useUserStore();
 
@@ -26,11 +28,7 @@ let manufacturers = computed(() => manufacturersStore.FILTERED_MANUFACTURERS);
 
 let selectManufacturer = (manufacturer: string) => {
   userStore.SELECT_MANUFACTURER(manufacturer);
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  });
+  scrollToTop();
 };
 
 let isManufacturerSelected = (manufacturer: string) => {

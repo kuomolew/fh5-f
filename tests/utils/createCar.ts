@@ -4,6 +4,7 @@ export const createCar = (car: Partial<Car> = {}): Car => ({
   id: "Abarth 595 '68",
   manufacturer: 'Abarth',
   model: 'Abarth 595 esseesse',
+  image: 'Abarth_595_68',
   year: 1968,
   country: 'IT',
   type: 'Cult Classics',
