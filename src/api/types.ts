@@ -2,6 +2,7 @@ export interface Car {
   id: string;
   manufacturer: string;
   model: string;
+  image: string;
   year: number;
   country: string;
   type: string;
