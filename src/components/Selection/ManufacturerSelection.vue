@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col border-r border-solid border-brand-gray-200 bg-white p-4 w-80 h-full min-h-screen"
+    class="flex flex-col border-r border-solid border-gray-200 bg-white p-4 w-80 h-full min-h-screen"
   >
     <h1 class="w-full text-center text-xl font-medium">Make:</h1>
     <manufacturer-card
