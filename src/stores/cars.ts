@@ -17,6 +17,7 @@ export const useCarsStore = defineStore('cars', {
     async FETCH_CARS() {
       const cars = await getCars();
       this.cars = cars;
+      console.log('FETCH_CARS');
     },
   },
 

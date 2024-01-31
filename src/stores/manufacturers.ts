@@ -17,6 +17,7 @@ export const useManufacturersStore = defineStore('manufacturers', {
     async FETCH_MANUFACTURERS() {
       const manufacturers = await getManufacturers();
       this.manufacturers = manufacturers;
+      console.log('FETCH_MANUFACTURERS');
     },
   },
 
