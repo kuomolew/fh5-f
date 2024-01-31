@@ -1,6 +1,12 @@
 import { createPinia, setActivePinia } from 'pinia';
+import type { Mock } from 'vitest';
+
+import axios from 'axios';
 
 import { useUserStore } from '@/stores/user';
+
+vi.mock('axios');
+const axiosGetMock = axios.get as Mock;
 
 describe('state', () => {
   beforeEach(() => {
@@ -23,6 +29,12 @@ describe('state', () => {
     const store = useUserStore();
 
     expect(store.selectedManufacturer).toBe('');
+  });
+
+  it('keeps track users garage', () => {
+    const store = useUserStore();
+
+    expect(store.garage).toEqual(new Set());
   });
 });
 
@@ -67,6 +79,43 @@ describe('actions', () => {
       expect(store.selectedManufacturer).toBe('');
     });
   });
+
+  describe('FETCH_GARAGE', () => {
+    it('makes api request and stores received car ids', async () => {
+      const garage = { garage: ['My new Car'] };
+      axiosGetMock.mockResolvedValue({ data: garage });
+
+      const store = useUserStore();
+      await store.FETCH_GARAGE();
+
+      const setGarage = new Set();
+      setGarage.add('My new Car');
+
+      expect(store.garage).toEqual(setGarage);
+    });
+  });
+
+  describe('ADD_TO_GARAGE', () => {
+    it('adds car id to garage', async () => {
+      const store = useUserStore();
+      store.ADD_TO_GARAGE('Peugeot');
+
+      const setGarage = new Set();
+      setGarage.add('Peugeot');
+
+      expect(store.garage).toEqual(setGarage);
+    });
+  });
+
+  describe('REMOVE_FROM_GARAGE', () => {
+    it('removes selected car id from garage', async () => {
+      const store = useUserStore();
+      store.garage.add('Peugeot');
+      store.REMOVE_FROM_GARAGE('Peugeot');
+
+      expect(store.garage).toEqual(new Set());
+    });
+  });
 });
 
 describe('getters', () => {
@@ -93,6 +142,17 @@ describe('getters', () => {
       const request = store.GET_MANUFACTURER();
 
       expect(request).toBe('Peugeot');
+    });
+  });
+
+  describe('GET_GARAGE', () => {
+    it('provides all sorted car ids from garage', async () => {
+      const store = useUserStore();
+      store.garage.add('Peugeot');
+      store.garage.add('Mitsubishi');
+      const result = store.GET_GARAGE();
+
+      expect(result).toEqual(['Mitsubishi', 'Peugeot']);
     });
   });
 });
