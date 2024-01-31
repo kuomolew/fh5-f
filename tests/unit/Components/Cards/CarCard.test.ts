@@ -6,6 +6,12 @@ import CarCard from '@/components/Cards/CarCard.vue';
 import type { Car } from '@/api/types';
 import { createCar } from '../../../utils/createCar';
 
+vi.mock('@/components/Cards/CarCard/GarageButton.vue', () => ({
+  default: {
+    template: '<div data-testid="car-card-garage-button">Mocked card garage button component</div>',
+  },
+}));
+
 const renderCarCard = (car: Car) => {
   const pinia = createTestingPinia();
 
@@ -203,5 +209,14 @@ describe('CarCard', () => {
     });
 
     expect(mission).toBeInTheDocument();
+  });
+
+  it('renders garage-button component', () => {
+    const car = createCar();
+    renderCarCard(car);
+
+    const garageButtonComponent = screen.getByTestId('car-card-garage-button');
+
+    expect(garageButtonComponent).toBeInTheDocument();
   });
 });
