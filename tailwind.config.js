@@ -18,8 +18,9 @@ module.exports = {
         'opacity-lime-500': 'rgba(101, 163, 13, 0.65)',
       },
       boxShadow: {
-        green: '0 0 3px 3px rgb(74 222 128)',
+        green: '0 0 3px 3px rgb(74, 222, 128)',
         gray: '0 1px 3px 0 rgba(60, 64, 67, 0.3)',
+        red: '0 0 3px 3px rgb(239, 68, 68)',
       },
     },
   },
