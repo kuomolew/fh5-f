@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useCarsStore } from '@/stores/cars';
-import CarCard from '@/components/Cards/CarCard.vue';
+import CarCard from '@/components/Cards/CarCard/CarCard.vue';
 
 const carsStore = useCarsStore();
 

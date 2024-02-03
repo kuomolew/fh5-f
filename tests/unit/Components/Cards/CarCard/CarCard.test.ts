@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/vue';
 import { createTestingPinia } from '@pinia/testing';
 
-import CarCard from '@/components/Cards/CarCard.vue';
+import CarCard from '@/components/Cards/CarCard/CarCard.vue';
 
 import type { Car } from '@/api/types';
-import { createCar } from '../../../utils/createCar';
+import { createCar } from '../../../../utils/createCar';
 
-vi.mock('@/components/Cards/CarCard/GarageButton.vue', () => ({
+vi.mock('@/components/Cards/CarCard/CarCardGarageButton.vue', () => ({
   default: {
     template: '<div data-testid="car-card-garage-button">Mocked card garage button component</div>',
   },

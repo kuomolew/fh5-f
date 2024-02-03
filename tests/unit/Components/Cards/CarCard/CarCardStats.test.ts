@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/vue';
 
-import CarStats from '@/components/Cards/CarCard/CarStats.vue';
+import CarCardStats from '@/components/Cards/CarCard/CarCardStats.vue';
 
-const renderCarStats = (props = {}) => {
-  render(CarStats, {
+const renderCarCardStats = (props = {}) => {
+  render(CarCardStats, {
     props: {
       speed: 250,
       handling: 250,
@@ -17,9 +17,9 @@ const renderCarStats = (props = {}) => {
   });
 };
 
-describe('CarStats', () => {
+describe('CarCardStats', () => {
   it('renders title', () => {
-    renderCarStats();
+    renderCarCardStats();
 
     const title = screen.getByRole('heading', {
       name: /stats:/i,
@@ -30,7 +30,7 @@ describe('CarStats', () => {
 
   it('renders car speed', () => {
     const props = { speed: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const speed = screen.getByRole('heading', {
       name: /15.0/i,
@@ -41,7 +41,7 @@ describe('CarStats', () => {
 
   it('renders car handling', () => {
     const props = { handling: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const handling = screen.getByRole('heading', {
       name: /15.0/i,
@@ -52,7 +52,7 @@ describe('CarStats', () => {
 
   it('renders car acceleration', () => {
     const props = { acceleration: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const acceleration = screen.getByRole('heading', {
       name: /15.0/i,
@@ -63,7 +63,7 @@ describe('CarStats', () => {
 
   it('renders car launch', () => {
     const props = { launch: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const launch = screen.getByRole('heading', {
       name: /15.0/i,
@@ -74,7 +74,7 @@ describe('CarStats', () => {
 
   it('renders car braking', () => {
     const props = { braking: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const braking = screen.getByRole('heading', {
       name: /15.0/i,
@@ -85,7 +85,7 @@ describe('CarStats', () => {
 
   it('renders car offroad', () => {
     const props = { offroad: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const offroad = screen.getByRole('heading', {
       name: /15.0/i,
@@ -96,7 +96,7 @@ describe('CarStats', () => {
 
   it('renders car total stat', () => {
     const props = { stat: 150 };
-    renderCarStats(props);
+    renderCarCardStats(props);
 
     const stat = screen.getByRole('heading', {
       name: /15.0/i,

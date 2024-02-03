@@ -1,6 +1,6 @@
 <template>
   <div class="relative border border-green-500 w-96">
-    <appropriate-image
+    <car-card-image
       :image="car.image"
       :path="'cars'"
       :alt="`${car.id} image`"
@@ -12,9 +12,9 @@
       <h1 class="text-center text-xl font-bold">{{ car.id }}</h1>
     </div>
 
-    <car-rarity :rarity="car.rarity" />
+    <car-card-rarity :rarity="car.rarity" />
 
-    <appropriate-image
+    <car-card-image
       :image="car.country"
       :path="'flags'"
       :alt="`${car.country} flag`"
@@ -47,7 +47,7 @@
       </div>
 
       <div class="flex">
-        <car-stats
+        <car-card-stats
           :speed="car.speed"
           :handling="car.handling"
           :acceleration="car.acceleration"
@@ -67,7 +67,7 @@
       </div>
 
       <div class="flex flex-1 justify-end items-end w-full px-3 mb-3">
-        <garage-button :car-id="car.id" />
+        <car-card-garage-button :car-id="car.id" />
       </div>
     </div>
   </div>
@@ -78,10 +78,10 @@ import { type PropType } from 'vue';
 
 import type { Car } from '@/api/types';
 
-import AppropriateImage from '@/components/Cards/CarCard/AppropriateImage.vue';
-import CarRarity from '@/components/Cards/CarCard/CarRarity.vue';
-import CarStats from '@/components/Cards/CarCard/CarStats.vue';
-import GarageButton from '@/components/Cards/CarCard/GarageButton.vue';
+import CarCardImage from '@/components/Cards/CarCard/CarCardImage.vue';
+import CarCardRarity from '@/components/Cards/CarCard/CarCardRarity.vue';
+import CarCardStats from '@/components/Cards/CarCard/CarCardStats.vue';
+import CarCardGarageButton from '@/components/Cards/CarCard/CarCardGarageButton.vue';
 
 defineProps({
   car: {

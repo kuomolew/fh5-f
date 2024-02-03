@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/vue';
 
-import CarRarity from '@/components/Cards/CarCard/CarRarity.vue';
+import CarCardRarity from '@/components/Cards/CarCard/CarCardRarity.vue';
 
-const renderCarRarity = (rarity: string) => {
-  render(CarRarity, {
+const renderCarCardRarity = (rarity: string) => {
+  render(CarCardRarity, {
     props: {
       rarity,
     },
   });
 };
 
-describe('CarRarity', () => {
+describe('CarCardRarity', () => {
   it('renders text', () => {
-    renderCarRarity('Very Rare');
+    renderCarCardRarity('Very Rare');
     const title = screen.getByRole('heading', {
       name: /very rare/i,
     });
@@ -21,7 +21,7 @@ describe('CarRarity', () => {
   });
 
   it('applies classes', () => {
-    renderCarRarity('Very Rare');
+    renderCarCardRarity('Very Rare');
     const component = screen.getByTestId('car-card-rarity-div');
 
     expect(component).toHaveClass('very-rare');
