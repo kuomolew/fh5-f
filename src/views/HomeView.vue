@@ -3,13 +3,23 @@
     <manufacturer-letter-selection />
     <div class="flex flex-row flex-nowrap w-full">
       <manufacturer-selection />
-      <car-listing-by-manufacturer />
+      <home-view-text v-if="!selectedManufacturer" />
+      <car-listing-by-manufacturer v-else />
     </div>
   </main>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
+
 import ManufacturerLetterSelection from '@/components/Selection/ManufacturerLetterSelection.vue';
 import ManufacturerSelection from '@/components/Selection/ManufacturerSelection.vue';
 import CarListingByManufacturer from '@/components/CarListings/CarListingByManufacturer.vue';
+import HomeViewText from '@/components/Texts/HomeViewText.vue';
+
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
+
+const selectedManufacturer = computed(() => userStore.GET_MANUFACTURER());
 </script>
