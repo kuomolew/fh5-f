@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap w-full h-fit justify-around my-5 mx-10">
+  <div class="flex flex-wrap w-full h-fit justify-around py-5 px-10">
     <car-card v-for="car in cars" :key="car.id" :car="car" class="my-5" />
   </div>
 </template>
