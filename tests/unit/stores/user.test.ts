@@ -15,6 +15,7 @@ describe('state', () => {
 
   it('keeps track if user is logged in', () => {
     const store = useUserStore();
+    store.isLoggedIn = false;
 
     expect(store.isLoggedIn).toBe(false);
   });

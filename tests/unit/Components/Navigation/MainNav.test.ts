@@ -46,8 +46,20 @@ describe('MainNav', () => {
 
   describe('when the user logs in', () => {
     it('displays user profile picture', async () => {
-      renderMainNav();
+      const pinia = createTestingPinia();
+      const push = vi.fn();
+      useRouteMock.mockReturnValue({ push });
       const userStore = useUserStore();
+      userStore.isLoggedIn = false;
+
+      render(MainNav, {
+        global: {
+          plugins: [pinia],
+          stubs: {
+            RouterLink: RouterLinkStub,
+          },
+        },
+      });
 
       const unloggedProfileImage = screen.queryByRole('img', {
         name: /user profile image/i,

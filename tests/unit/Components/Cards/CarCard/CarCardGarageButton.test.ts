@@ -24,6 +24,9 @@ describe('CarCardGarageButton', () => {
 
   describe('when the user is logged out', () => {
     it('shows "Sign in to use" text', async () => {
+      const userStore = useUserStore();
+      userStore.isLoggedIn = false;
+
       renderCarCardGarageButton();
       const button = await screen.findByRole('button', {
         name: /sign in to use/i,
@@ -33,6 +36,9 @@ describe('CarCardGarageButton', () => {
     });
 
     it('provides appropriate class', async () => {
+      const userStore = useUserStore();
+      userStore.isLoggedIn = false;
+
       renderCarCardGarageButton();
 
       const button = await screen.findByRole('button', {
@@ -45,6 +51,7 @@ describe('CarCardGarageButton', () => {
     describe('when the user logs in', () => {
       it('updates button text', async () => {
         const userStore = useUserStore();
+        userStore.isLoggedIn = false;
         const carCardGarageButton = renderCarCardGarageButton();
 
         let button = await screen.findByRole('button', {

@@ -10,6 +10,9 @@ describe('HomeViewText', () => {
   describe('user is logged out', () => {
     it('renders start text', () => {
       const pinia = createTestingPinia();
+      const userStore = useUserStore();
+      userStore.isLoggedIn = false;
+
       render(HomeViewText, {
         global: {
           plugins: [pinia],
