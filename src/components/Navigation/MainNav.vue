@@ -41,7 +41,7 @@ const menuItems = ref([
   },
   {
     text: 'My Garage',
-    url: 'MyGarage',
+    url: 'Garage',
   },
 ]);
 
