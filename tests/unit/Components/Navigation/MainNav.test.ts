@@ -41,7 +41,7 @@ describe('MainNav', () => {
     const navigationMenuItems = screen.getAllByRole('listitem');
     const navigationMenuTexts = navigationMenuItems.map((item) => item.textContent);
 
-    expect(navigationMenuTexts).toEqual(['My Garage']);
+    expect(navigationMenuTexts).toEqual(['All Cars', 'My Garage']);
   });
 
   describe('when the user logs in', () => {
