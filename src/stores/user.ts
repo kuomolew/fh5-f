@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import getGarage from '@/api/getGarage';
 
 export const useUserStore = defineStore('user', () => {
-  const isLoggedIn = ref(false);
+  const isLoggedIn = ref(true);
   const selectedManufacturerLetter = ref('All');
   const selectedManufacturer = ref('');
   const garage = ref(new Set<string>());
