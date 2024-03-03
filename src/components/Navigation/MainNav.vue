@@ -36,6 +36,10 @@ import ProfileImage from '@/components/Navigation/ProfileImage.vue';
 
 const menuItems = ref([
   {
+    text: 'All Cars',
+    url: 'Home',
+  },
+  {
     text: 'My Garage',
     url: 'MyGarage',
   },
@@ -46,3 +50,9 @@ const userStore = useUserStore();
 const isLoggedIn = computed(() => userStore.isLoggedIn);
 const LOGIN_USER = userStore.LOGIN_USER;
 </script>
+
+<style scoped>
+.router-link-active {
+  @apply font-semibold;
+}
+</style>
