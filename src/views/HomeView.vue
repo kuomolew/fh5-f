@@ -1,6 +1,6 @@
 <template>
   <main>
-    <manufacturer-letter-selection />
+    <manufacturer-letter-selection :manufacturers="manufacturers" />
     <div class="flex flex-row flex-nowrap w-full">
       <manufacturer-selection />
       <home-view-text v-if="!selectedManufacturer" />
@@ -18,8 +18,12 @@ import CarListingByManufacturer from '@/components/CarListings/CarListingByManuf
 import HomeViewText from '@/components/Texts/HomeViewText.vue';
 
 import { useUserStore } from '@/stores/user';
+import { useManufacturersStore } from '@/stores/manufacturers';
 
 const userStore = useUserStore();
-
 const selectedManufacturer = computed(() => userStore.GET_MANUFACTURER());
+
+const manufacturersStore = useManufacturersStore();
+
+let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
 </script>

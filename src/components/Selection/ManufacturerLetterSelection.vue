@@ -18,16 +18,21 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, toRefs } from 'vue';
 
-import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
 
 import allFirstLetters from '@/utils/allFirstLetters';
 
-const manufacturersStore = useManufacturersStore();
+const props = defineProps({
+  manufacturers: {
+    type: Array as () => string[],
+    required: true,
+  },
+});
 
-let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
+const { manufacturers } = toRefs(props);
+
 let manufacturerLetters = computed(() => allFirstLetters(manufacturers.value));
 
 const userStore = useUserStore();

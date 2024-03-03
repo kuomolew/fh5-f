@@ -15,6 +15,9 @@ describe('ManufacturerLetterSelection', () => {
       global: {
         plugins: [pinia],
       },
+      props: {
+        manufacturers: [],
+      },
     });
     const title = screen.getByText(/select manufacturer:/i);
 
@@ -30,6 +33,9 @@ describe('ManufacturerLetterSelection', () => {
     render(ManufacturerLetterSelection, {
       global: {
         plugins: [pinia],
+      },
+      props: {
+        manufacturers: manufacturers,
       },
     });
 
@@ -50,6 +56,9 @@ describe('ManufacturerLetterSelection', () => {
         global: {
           plugins: [pinia],
         },
+        props: {
+          manufacturers: manufacturers,
+        },
       });
       const userStore = useUserStore();
 
@@ -64,13 +73,16 @@ describe('ManufacturerLetterSelection', () => {
 
     it('applies active styles to selected letter', async () => {
       setActivePinia(createPinia());
-      const manufacturersStore = useManufacturersStore();
-      manufacturersStore.manufacturers = ['Acura'];
+      const manufacturers = ['Acura'];
 
       const userStore = useUserStore();
       userStore.SELECT_MANUFACTURER_LETTER('A');
 
-      render(ManufacturerLetterSelection);
+      render(ManufacturerLetterSelection, {
+        props: {
+          manufacturers: manufacturers,
+        },
+      });
 
       const manufacturerLetterItem = await screen.findByRole('button', {
         name: '[ A ]',
