@@ -45,7 +45,7 @@ describe('getters', () => {
     setActivePinia(createPinia());
   });
 
-  describe('INCLUDE_CAR_BY_MANUFACTURER', () => {
+  describe('INCLUDE_CAR_BY_SELECTED_MANUFACTURER', () => {
     describe('when none manufacturer was selected', () => {
       it('includes none of cars', () => {
         const car1 = createCar({ manufacturer: 'Nissan' });
@@ -61,7 +61,7 @@ describe('getters', () => {
 
         const result: boolean[] = [];
 
-        cars.forEach((car) => result.push(store.INCLUDE_CAR_BY_MANUFACTURER(car)));
+        cars.forEach((car) => result.push(store.INCLUDE_CAR_BY_SELECTED_MANUFACTURER(car)));
 
         expect(result).toEqual([false, false, false]);
       });
@@ -83,7 +83,7 @@ describe('getters', () => {
 
         const result: boolean[] = [];
 
-        cars.forEach((car) => result.push(store.INCLUDE_CAR_BY_MANUFACTURER(car)));
+        cars.forEach((car) => result.push(store.INCLUDE_CAR_BY_SELECTED_MANUFACTURER(car)));
 
         expect(result).toEqual([false, true, false, true]);
       });
