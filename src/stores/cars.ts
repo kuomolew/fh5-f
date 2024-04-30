@@ -22,7 +22,7 @@ export const useCarsStore = defineStore('cars', {
   },
 
   getters: {
-    INCLUDE_CAR_BY_MANUFACTURER: () => (car: Car) => {
+    INCLUDE_CAR_BY_SELECTED_MANUFACTURER: () => (car: Car) => {
       const userStore = useUserStore();
 
       if (userStore.selectedManufacturer.length === 0) return false;
