@@ -30,5 +30,6 @@ const manufacturersStore = useManufacturersStore();
 
 let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
 
+userStore.SELECT_MANUFACTURER_LETTER('All');
 let selectedLetter = computed(() => userStore.GET_MANUFACTURER_LETTER());
 </script>

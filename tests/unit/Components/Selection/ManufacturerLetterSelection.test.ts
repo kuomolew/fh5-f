@@ -17,6 +17,7 @@ describe('ManufacturerLetterSelection', () => {
       },
       props: {
         manufacturers: [],
+        selectedLetter: 'All',
       },
     });
     const title = screen.getByText(/select manufacturer:/i);
@@ -36,13 +37,14 @@ describe('ManufacturerLetterSelection', () => {
       },
       props: {
         manufacturers: manufacturers,
+        selectedLetter: 'All',
       },
     });
 
     const manufacturerLetterItems = await screen.findAllByRole('button');
     const manufacturerLetterTexts = manufacturerLetterItems.map((item) => item.textContent);
 
-    expect(manufacturerLetterTexts).toEqual([' All ', ' A ', ' B ', ' P ']);
+    expect(manufacturerLetterTexts).toEqual(['[ All ]', ' A ', ' B ', ' P ']);
   });
 
   describe('when user clicks the letter', () => {
