@@ -1,6 +1,9 @@
 <template>
   <main>
-    <manufacturer-letter-selection :manufacturers="manufacturers" />
+    <manufacturer-letter-selection
+      :manufacturers="manufacturers"
+      :selected-letter="selectedLetter"
+    />
     <div class="flex flex-row flex-nowrap w-full">
       <manufacturer-selection />
       <home-view-text v-if="!selectedManufacturer" />
@@ -26,4 +29,6 @@ const selectedManufacturer = computed(() => userStore.GET_MANUFACTURER());
 const manufacturersStore = useManufacturersStore();
 
 let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
+
+let selectedLetter = computed(() => userStore.GET_MANUFACTURER_LETTER());
 </script>

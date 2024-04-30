@@ -58,6 +58,7 @@ describe('ManufacturerLetterSelection', () => {
         },
         props: {
           manufacturers: manufacturers,
+          selectedLetter: 'All',
         },
       });
       const userStore = useUserStore();
@@ -75,12 +76,10 @@ describe('ManufacturerLetterSelection', () => {
       setActivePinia(createPinia());
       const manufacturers = ['Acura'];
 
-      const userStore = useUserStore();
-      userStore.SELECT_MANUFACTURER_LETTER('A');
-
       render(ManufacturerLetterSelection, {
         props: {
           manufacturers: manufacturers,
+          selectedLetter: 'A',
         },
       });
 

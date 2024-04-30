@@ -29,6 +29,11 @@ const props = defineProps({
     type: Array as () => string[],
     required: true,
   },
+
+  selectedLetter: {
+    type: String,
+    required: true,
+  },
 });
 
 const { manufacturers } = toRefs(props);
@@ -36,7 +41,6 @@ const { manufacturers } = toRefs(props);
 let manufacturerLetters = computed(() => allFirstLetters(manufacturers.value));
 
 const userStore = useUserStore();
-let selectedLetter = computed(() => userStore.GET_MANUFACTURER_LETTER());
 
 const selectManufacturerLetter = (letter: string) => {
   userStore.SELECT_MANUFACTURER_LETTER(letter);
@@ -44,7 +48,7 @@ const selectManufacturerLetter = (letter: string) => {
 };
 
 let isLetterSelected = (letter: string) => {
-  return letter === selectedLetter.value;
+  return letter === props.selectedLetter;
 };
 </script>
 
