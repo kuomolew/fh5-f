@@ -33,7 +33,7 @@ const userStore = useUserStore();
 const loggedIn = computed(() => userStore.isLoggedIn);
 
 const manufacturersStore = useManufacturersStore();
-let manufacturers = computed(() => manufacturersStore.ALL_MANUFACTURERS);
+let manufacturers = computed(() => manufacturersStore.GARAGE_MANUFACTURERS);
 let garageManufacturers = computed(() => manufacturersStore.FILTERED_GARAGE_MANUFACTURERS);
 const selectedManufacturer = computed(() => userStore.GET_MANUFACTURER());
 
