@@ -36,5 +36,24 @@ export const useCarsStore = defineStore('cars', {
     ALL_CARS(state): Car[] {
       return state.cars;
     },
+
+    GARAGE_CARS(state): Car[] {
+      const userStore = useUserStore();
+      const garage = userStore.GET_GARAGE();
+
+      const cars: Car[] = [];
+
+      state.cars.forEach((car) => {
+        if (garage.includes(car.id)) {
+          cars.push(car);
+        }
+      });
+
+      return cars;
+    },
+
+    FILTERED_GARAGE_CARS_BY_MANUFACTURER(): Car[] {
+      return this.GARAGE_CARS.filter((car) => this.INCLUDE_CAR_BY_SELECTED_MANUFACTURER(car));
+    },
   },
 });

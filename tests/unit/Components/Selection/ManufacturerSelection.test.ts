@@ -3,7 +3,6 @@ import { createTestingPinia } from '@pinia/testing';
 import userEvent from '@testing-library/user-event';
 
 import ManufacturerSelection from '@/components/Selection/ManufacturerSelection.vue';
-import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
 
 declare global {
@@ -12,12 +11,15 @@ declare global {
   }
 }
 
-const renderManufacturerSelection = () => {
+const renderManufacturerSelection = (manufacturers: String[] = []) => {
   const pinia = createTestingPinia();
 
   render(ManufacturerSelection, {
     global: {
       plugins: [pinia],
+    },
+    props: {
+      manufacturers: [...manufacturers],
     },
   });
 };
@@ -31,10 +33,8 @@ describe('ManufacturerSelection', () => {
   });
 
   it('renders manufacturer card', async () => {
-    renderManufacturerSelection();
     const manufacturers = ['Acura', 'Aston Martin', 'Bugatti', 'Peugeot'];
-    const manufacturersStore = useManufacturersStore();
-    manufacturersStore.manufacturers = [...manufacturers];
+    renderManufacturerSelection(manufacturers);
 
     const manufacturerButtons = await screen.findAllByRole('button');
     const manufacturerButtonTexts = manufacturerButtons.map((item) => item.textContent);
@@ -53,11 +53,8 @@ describe('ManufacturerSelection', () => {
     });
 
     it('adds clicked manufacturer to selected', async () => {
-      renderManufacturerSelection();
-
       const manufacturers = ['Acura', 'Aston Martin', 'Bugatti', 'Peugeot'];
-      const manufacturersStore = useManufacturersStore();
-      manufacturersStore.manufacturers = [...manufacturers];
+      renderManufacturerSelection(manufacturers);
 
       const userStore = useUserStore();
 

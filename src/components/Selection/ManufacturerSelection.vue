@@ -14,17 +14,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
 import ManufacturerCard from '@/components/Cards/ManufacturerCard.vue';
 
 import scrollToTop from '@/utils/scrollToTop';
 
-const manufacturersStore = useManufacturersStore();
-const userStore = useUserStore();
+defineProps({
+  manufacturers: {
+    type: Array as () => string[],
+    required: true,
+  },
+});
 
-let manufacturers = computed(() => manufacturersStore.FILTERED_MANUFACTURERS);
+const userStore = useUserStore();
 
 let selectManufacturer = (manufacturer: string) => {
   userStore.SELECT_MANUFACTURER(manufacturer);

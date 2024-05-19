@@ -115,4 +115,37 @@ describe('getters', () => {
       expect(store.ALL_CARS).toEqual([car1, car2]);
     });
   });
+
+  describe('GARAGE_CARS', () => {
+    it('gets cars user has at garage', () => {
+      const car1 = createCar();
+      const store = useCarsStore();
+      const userStore = useUserStore();
+
+      const mockedGetGarage = () => ["Abarth 595 '68"];
+
+      userStore.GET_GARAGE = mockedGetGarage;
+
+      store.cars.push(car1);
+
+      expect(store.GARAGE_CARS).toEqual([car1]);
+    });
+  });
+
+  describe('FILTERED_GARAGE_CARS_BY_MANUFACTURER', () => {
+    it('gets cars user has at garage filtered by manufacturer', () => {
+      const car1 = createCar({ manufacturer: 'Nissan' });
+      const car2 = createCar();
+
+      const userStore = useUserStore();
+      userStore.selectedManufacturer = 'Nissan';
+
+      const store = useCarsStore();
+      Object.defineProperty(store, 'GARAGE_CARS', {
+        get: () => [car1, car2],
+      });
+
+      expect(store.FILTERED_GARAGE_CARS_BY_MANUFACTURER).toEqual([car1]);
+    });
+  });
 });

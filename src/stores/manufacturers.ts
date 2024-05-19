@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import getManufacturers from '@/api/getManufacturers';
 
 import { useUserStore } from '@/stores/user';
+import { useCarsStore } from '@/stores/cars';
 
 export interface ManufacturersState {
   manufacturers: string[];
@@ -40,6 +41,22 @@ export const useManufacturersStore = defineStore('manufacturers', {
 
     ALL_MANUFACTURERS(state): string[] {
       return state.manufacturers.sort((a, b) => a.localeCompare(b));
+    },
+
+    GARAGE_MANUFACTURERS(): string[] {
+      const carsStore = useCarsStore();
+
+      const garageCars = carsStore.GARAGE_CARS;
+      const manufacturersSet = new Set<string>();
+      garageCars.forEach((car) => manufacturersSet.add(car.manufacturer));
+
+      return Array.from(manufacturersSet);
+    },
+
+    FILTERED_GARAGE_MANUFACTURERS(): string[] {
+      return this.GARAGE_MANUFACTURERS.filter((manufacturer) =>
+        this.INCLUDE_MANUFACTURER_BY_LETTER(manufacturer),
+      ).sort((a, b) => a.localeCompare(b));
     },
   },
 });

@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { useManufacturersStore } from '@/stores/manufacturers';
 import { useUserStore } from '@/stores/user';
+import { useCarsStore } from '@/stores/cars';
 
 vi.mock('axios');
 const axiosGetMock = axios.get as Mock;
@@ -139,6 +140,48 @@ describe('getters', () => {
       store.manufacturers.push(manufacturer1, manufacturer2, manufacturer3);
 
       expect(store.ALL_MANUFACTURERS).toEqual(['Acura', 'Xpeng', 'Zenvo']);
+    });
+  });
+
+  describe('GARAGE_MANUFACTURERS', () => {
+    it('gets list of manufacturers user has in garage', () => {
+      const carsStore = useCarsStore();
+      Object.defineProperty(carsStore, 'GARAGE_CARS', {
+        get: () => [{ manufacturer: 'Acura' }, { manufacturer: 'Ariel' }],
+      });
+
+      const manufacturer1 = 'Acura';
+      const manufacturer2 = 'Ariel';
+      const manufacturer3 = 'BMW';
+      const store = useManufacturersStore();
+      store.manufacturers.push(manufacturer1, manufacturer2, manufacturer3);
+
+      expect(store.GARAGE_MANUFACTURERS).toEqual(['Acura', 'Ariel']);
+    });
+  });
+
+  describe('FILTERED_GARAGE_MANUFACTURERS', () => {
+    it('gets all filtered garage manufacturers', () => {
+      const manufacturer1 = 'Xpeng';
+      const manufacturer2 = 'Zenvo';
+      const store = useManufacturersStore();
+      Object.defineProperty(store, 'GARAGE_MANUFACTURERS', {
+        get: () => [manufacturer1, manufacturer2],
+      });
+
+      expect(store.FILTERED_GARAGE_MANUFACTURERS).toEqual(['Xpeng', 'Zenvo']);
+    });
+
+    it('sorts all filtered manufacturers', () => {
+      const manufacturer1 = 'Xpeng';
+      const manufacturer2 = 'Zenvo';
+      const manufacturer3 = 'Acura';
+      const store = useManufacturersStore();
+      Object.defineProperty(store, 'GARAGE_MANUFACTURERS', {
+        get: () => [manufacturer1, manufacturer2, manufacturer3],
+      });
+
+      expect(store.FILTERED_GARAGE_MANUFACTURERS).toEqual(['Acura', 'Xpeng', 'Zenvo']);
     });
   });
 });
